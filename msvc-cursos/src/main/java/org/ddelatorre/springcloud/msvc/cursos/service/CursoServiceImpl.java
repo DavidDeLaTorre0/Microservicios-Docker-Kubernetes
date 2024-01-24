@@ -1,6 +1,6 @@
 package org.ddelatorre.springcloud.msvc.cursos.service;
 
-import org.ddelatorre.springcloud.msvc.cursos.entity.Curso;
+import org.ddelatorre.springcloud.msvc.cursos.models.entity.Curso;
 import org.ddelatorre.springcloud.msvc.cursos.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

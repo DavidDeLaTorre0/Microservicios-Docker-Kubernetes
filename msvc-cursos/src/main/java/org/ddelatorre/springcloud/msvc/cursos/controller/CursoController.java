@@ -1,7 +1,7 @@
 package org.ddelatorre.springcloud.msvc.cursos.controller;
 
 import jakarta.validation.Valid;
-import org.ddelatorre.springcloud.msvc.cursos.entity.Curso;
+import org.ddelatorre.springcloud.msvc.cursos.models.entity.Curso;
 import org.ddelatorre.springcloud.msvc.cursos.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class CursoController {
     private CursoService cursoService;
 
     /*
-        Se puede poner sol List<Curso>, pero asi es mas implicito
+        Se puede ponçer sol List<Curso>, pero asi es mas implicito
     */
     @GetMapping
     public ResponseEntity<List<Curso>> listar(){
