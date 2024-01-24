@@ -1,10 +1,7 @@
 package org.ddelatorre.springcloud.msvc.usuarios.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name="usuarios")
@@ -15,15 +12,19 @@ public class Usuario {
     private Long id;
     @NotBlank
     private String name;
+
+    //@Email valida el correo electronico pero valida cuando el correo no tiene dominio asique es mejor ponerle expresiones regulares
     @NotEmpty
-    @Email
+    @Pattern(regexp=".+@.+\\.[a-z]+", message="Dirección de correo inválido!")
     @Column(unique = true)
     private String email;
 
-    /*  NotNull es la verificacion de que no se introduzcan valores nulos, en Strings es NotEmpty("el mesaje que queramos") NotEmpty (message = "El campo nombre no puede ser vacio")
-    *   para tipos de int, Long, Date o cualquier otro objeto es NotNull
-    *
-    *  Y para que NO SE PUEDAN PONER ESPACIOS EN BLANCO como valor ni valores vacios se usa NotBlank
+    /*  En Strings es NotEmpty(message = "el mesaje que queramos") NotEmpty (message = "El campo nombre no puede ser vacio")
+        OJO QUE NOS PUEDEN COLAR UN ESPACIO EN BLANCO, ES MEJOR USAR @NOTBLANK
+    *   NotNull para tipos de int, Long, Date o cualquier otro objeto
+    *    NotNull es la verificacion de que no se introduzcan valores nulos,
+     *  NotBlank y  para que NO SE PUEDAN PONER ESPACIOS EN BLANCO como valor ni valores vacios se usa
+     *
     */
     @NotBlank
     private String password;

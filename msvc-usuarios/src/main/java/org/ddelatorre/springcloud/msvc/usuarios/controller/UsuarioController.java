@@ -10,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /*  DIFERENCIA DE @RESTCONTROLLER Y @CONTROLLER
 *   Controller es para MVC vistas, que utiliza thymeleaf
@@ -95,10 +92,19 @@ public class UsuarioController {
 
     @PostMapping("/")
     public ResponseEntity<?> crear(@Valid @RequestBody Usuario usuario, BindingResult result){
-        //hasErrors si tiene error lo tenemos que pasar a un JSON, pero solo el mensaje de error
+
         if(result.hasErrors()){
             return validarError(result);
         }
+        //para evitar hacer las validaciones de si el correo esta vacío,
+        //es solo poner la validación de existe después de result.hasErrors()
+        //ya que este tiene esa validación en la configuración de la entidad
+        if(usuarioService.findByEmail(usuario.getEmail()).isPresent()){
+            return ResponseEntity.badRequest().body(Collections.singletonMap("error", "Ya existe un usuario con ese correo electronico!"));//Lo devuelv como un json "error":"msg"
+        }
+
+        //hasErrors si tiene error, lo tenemos que pasar a un JSON, pero solo el mensaje de error
+
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardar(usuario));
     }
 
@@ -110,9 +116,9 @@ public class UsuarioController {
             Siempre despues del ObBJETO
      */
     @PutMapping("/{id}")
-
+    //Valid valida los parametros
+    //BindingResult está relacionado a la validacion
     public ResponseEntity<?> editar(@Valid @RequestBody Usuario usuario, BindingResult result, @PathVariable Long id){
-
         if(result.hasErrors()){
             return validarError(result);
         }
@@ -120,6 +126,12 @@ public class UsuarioController {
         Optional<Usuario> o = usuarioService.porId(id);
         if(o.isPresent()){
             Usuario usuarioDb = o.get();
+            if(!usuario.getEmail().equalsIgnoreCase(usuarioDb.getEmail()) && usuarioService.findByEmail(usuario.getEmail()).isPresent()){
+                return ResponseEntity.badRequest()
+                        .body(Collections
+                                .singletonMap("error", "Ya existe un usuario con ese correo electronico!"));
+            }
+
             usuarioDb.setName(usuario.getName());
             usuarioDb.setEmail(usuario.getEmail());
             usuarioDb.setPassword(usuario.getPassword());
@@ -130,7 +142,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id){
+    public ResponseEntity<?> eliminar(@Valid @PathVariable Long id){
         Optional<Usuario> o = usuarioService.porId(id);
         if(o.isPresent()){
             usuarioService.eliminar(id);
@@ -139,7 +151,7 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
-
+    //getMapResponseEntity o validarerror
     private static ResponseEntity<Map<String, String>> validarError(BindingResult result) {
         Map<String, String> errores = new HashMap<>();
         //getFielErrors devuelve una lista que es iterable, con cada campo con error
@@ -150,7 +162,7 @@ public class UsuarioController {
             //EL NOMBRE DEL ERROR, COMO VALOR PONEMOS EL MENSAJE, ERR.GETDEFAULT.. ES EL MENSAJE
             errores.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
         });
-        //va a deciur que el request no fue correcto y ene l cuerpo de la respuesta colocamos errores
+        //va a decir que el request no fue correcto y en el cuerpo de la respuesta colocamos errores
         return ResponseEntity.badRequest().body(errores);
     }
 }
