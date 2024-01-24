@@ -1,0 +1,18 @@
+spring.application.name=msvc-usuarios
+server.port=8001
+
+-Lo que ha despues del ? es por si da poroblema con serverTimezone, entonces hay que especificarle la zona horaria
+-solo en caso de otro error, es posiblemente ocasionado por el public key y se soluciona con allow de permitir, la clave publica
+
+spring.datasource.url=jdbc:mysql://localhost:3306/svc_usuarios?serverTimezone=Europe/Madrid&allowPublicKeyRetrieval=false
+
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.database-plataform=org.hibernate.dialect.MySQLDialect
+
+-generate ddl es para que lo cree la primera vez la tabla una sola vez, asi cuanndo reiniciemos no lo regenere
+spring.jpa.generate-ddl=true
+
+-loggin es para que nos muestre las consulatas SQL que se estan procesando por debajo
+logging.level.org.hibernate.SQL=debug
