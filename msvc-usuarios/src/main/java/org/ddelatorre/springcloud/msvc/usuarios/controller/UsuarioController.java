@@ -119,6 +119,8 @@ public class UsuarioController {
     //Valid valida los parametros
     //BindingResult está relacionado a la validacion
     public ResponseEntity<?> editar(@Valid @RequestBody Usuario usuario, BindingResult result, @PathVariable Long id){
+
+        //hasErrors()
         if(result.hasErrors()){
             return validarError(result);
         }
