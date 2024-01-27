@@ -26,10 +26,14 @@ public class Curso {
 
 
     //@TRANSIENT
-    // ESTA ANOTACION HACE QUE EL ATRIBUTO usuarios no este mapeado a la persistencia, a tablas, es solamente un campo que no es parte del contexto de hibernate ni de jpa
-    //Solo lo vamos a utilizar para poder poblar los datos completos de los usuarios no solo el id
     @Transient
     private List<Usuario> usuarios;
+    /*
+        ESTA ANOTACION HACE QUE EL ATRIBUTO usuarios no este mapeado a la persistencia, a tablas,
+        es solamente un campo que no es parte del contexto de hibernate ni de jpa
+        Solo lo vamos a utilizar para poder poblar los datos completos de los usuarios no solo el id
+    */
+
     public Long getId() {
         return id;
     }
@@ -59,11 +63,19 @@ public class Curso {
         cursoUsuarios.remove(cursoUsuario);
     }
 
-    public List<CursoUsuario> getCursoUsuario() {
+    public List<CursoUsuario> getCursoUsuarios() {
         return cursoUsuarios;
     }
 
-    public void setCursoUsuario(List<CursoUsuario> cursoUsuario) {
-        this.cursoUsuarios = cursoUsuario;
+    public void setCursoUsuarios(List<CursoUsuario> cursoUsuarios) {
+        this.cursoUsuarios = cursoUsuarios;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }

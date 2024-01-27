@@ -55,7 +55,7 @@ public class UsuarioController {
     *   y si no está presente el objeto usuario en vez de devolver null devolvemos un tipo de contenido no encontrado
     *   "error 404 no encontrado"
     *
-    *   ResponseEntity<?> la ? se le dice que es como un void, la respuesta http 200, 404, 401, etc
+    *   ResponseEntity<?> la ? es como un void, la respuesta http 200, 404, 401, etc
     *   PERO si encuentra el objeto lo devuelve si no no devuelve nada
     *  */
     @GetMapping("/{id}")
