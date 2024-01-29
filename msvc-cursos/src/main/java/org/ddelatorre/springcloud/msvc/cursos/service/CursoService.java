@@ -18,4 +18,6 @@ public interface CursoService {
     Optional<Usuario> asignarUsuarioACurso(Usuario usuario, Long cursoId);
     Optional<Usuario> crearUsuarioACurso(Usuario usuario, Long cursoId);
     Optional<Usuario> eliminarUsuarioACurso(Usuario usuario, Long cursoId);
+
+    void eliminarCursoUsuarioPorId(Long id);
 }

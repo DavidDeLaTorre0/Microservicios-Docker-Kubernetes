@@ -6,7 +6,6 @@ import org.ddelatorre.springcloud.msvc.cursos.models.entity.Curso;
 import org.ddelatorre.springcloud.msvc.cursos.models.entity.CursoUsuario;
 import org.ddelatorre.springcloud.msvc.cursos.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -129,6 +128,13 @@ public class CursoServiceImpl implements CursoService{
             return Optional.of(usuarioMsvc);
         }
         return Optional.empty();
+    }
+
+    //
+    @Override
+    @Transactional
+    public void eliminarCursoUsuarioPorId(Long id) {
+        cursoRepository.eliminarCursoUsuarioPorId(id);
     }
 
 

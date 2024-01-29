@@ -115,7 +115,7 @@ public class CursoController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/eliminar-usuario/{cursoId}")
+    @DeleteMapping("/eliminar-usuario/{cursoId}")//Por el id del curso
     public ResponseEntity<?> eliminarUsuario(@RequestBody Usuario usuario, @PathVariable Long cursoId){
         Optional<Usuario> o = null;
         try{
@@ -129,6 +129,12 @@ public class CursoController {
             return ResponseEntity.status(HttpStatus.OK).body(o.get());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/eliminar-usuario/{id}")//Por el id del usuario
+    public ResponseEntity<?> eliminarCursoUsuario(@PathVariable Long id){
+         cursoService.eliminarCursoUsuarioPorId(id);
+        return ResponseEntity.noContent().build();
     }
 
     //Con el correo verifica que tenga @, sea una direccion de formato correo
