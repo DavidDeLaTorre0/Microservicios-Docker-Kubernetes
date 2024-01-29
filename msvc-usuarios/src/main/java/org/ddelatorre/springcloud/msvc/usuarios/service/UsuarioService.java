@@ -19,5 +19,9 @@ Optional de Java 8, es un wrapper, es una clase que envuelve
     //Guardar, para insertar o editar
     Usuario guardar(Usuario usuario);
     void eliminar(Long id);
+
+    //La estructura de este código  viene de CrudRepositoy
+    List<Usuario> listarPorIds(Iterable<Long> ids);
+
     Optional <Usuario> findByEmail(String email);
 }

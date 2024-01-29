@@ -28,9 +28,10 @@ public class CursoController {
        return ResponseEntity.ok(cursoService.listar());
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<?> porId(@PathVariable Long id){
-        Optional<Curso> o = cursoService.porId(id);
+        Optional<Curso> o = cursoService.porIdConUsuario(id);//cursoService.porId(id); porIdConUsario se muestran los alumnos de ese curso
         if(o.isPresent()){
             return ResponseEntity.ok(o.get());
         }
@@ -129,7 +130,6 @@ public class CursoController {
         }
         return ResponseEntity.notFound().build();
     }
-
 
     //Con el correo verifica que tenga @, sea una direccion de formato correo
     // y muestra los mensajes de los valores vacios introducidos explicando su error

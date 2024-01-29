@@ -153,6 +153,15 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
+    // Los ids hay que inyectarlos como parametros del request, como es del tipo Get lo podemos enviar como parametro del request RequestParam
+    // si fuera Post lo podemos enviar como parametro del body RequestBody
+    @GetMapping("/usuarios-por-curso")
+    public ResponseEntity<?> obtenerAlumnosPorCurso(@RequestParam List<Long> ids){
+        return ResponseEntity.ok(usuarioService.listarPorIds(ids));
+    }
+
+
+
     //getMapResponseEntity o validarerror
     private static ResponseEntity<Map<String, String>> validarError(BindingResult result) {
         Map<String, String> errores = new HashMap<>();
