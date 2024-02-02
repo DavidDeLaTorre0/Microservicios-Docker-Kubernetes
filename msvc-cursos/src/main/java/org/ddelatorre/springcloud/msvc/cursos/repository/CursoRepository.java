@@ -15,7 +15,7 @@ public interface CursoRepository extends CrudRepository<Curso, Long> {
      //   MODIFIYING  para que haga el cambio en la tabla
      //   Query es para realizar consultas no es tanto para delete, upadate, insert por eso necesitamos la anotacion MODIFYING
      @Modifying
-     @Query("delete from CursUsuario cu where cu.usuario=?1")
+     @Query("delete from CursoUsuario cu where cu.usuarioId=?1")
      void eliminarCursoUsuarioPorId(Long id);
 
      //Con JPARepository puedo utililizar esta estructura pero con CrudRepo no parece tenerlo aun
