@@ -1,5 +1,6 @@
 package org.ddelatorre.springcloud.msvc.usuarios.service;
 
+import org.ddelatorre.springcloud.msvc.usuarios.clients.CursoClientRest;
 import org.ddelatorre.springcloud.msvc.usuarios.entities.Usuario;
 
 import org.ddelatorre.springcloud.msvc.usuarios.repository.UsuarioRepository;
@@ -14,6 +15,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private CursoClientRest clientHttp;
 
     /*
     *   @Transactional, no lo ha explicado mucho
@@ -35,6 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional
     public void eliminar(Long id) {
         usuarioRepository.deleteById(id);
+        clientHttp.eliminarCursoUsuario(id);
 
     }
 
