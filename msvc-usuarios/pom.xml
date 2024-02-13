@@ -16,10 +16,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>msvc-usuarios</name>
 	<description>Demo project for Spring Boot</description>
+
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.4</spring-cloud.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -73,6 +75,20 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!--
+			ERROR AL PASAR LOS TEST
+
+			Al intentar Para omitir la ejecución de pruebas (tests) en un proyecto de Maven durante la construcción, puedes usar el siguiente comando:
+
+			1º opcion - mvn clean install -DskipTests (no me ha funcionado, lo hice con la 2 opción )
+
+			2º opción - <plugin><artifactId>maven-surefire-plugin</artifactId><version>3.0.0</version><configuration><skipTests>true</skipTests></configuration></plugin>
+
+			(maven-surefire-plugin)
+			Esto configurará el plugin Surefire para omitir las pruebas en todas las construcciones futuras,
+			las excluye PERMANENTEMENTE, asegúrate de ajustar la versión del plugin según tu configuración actual
+			-->
 		</plugins>
 	</build>
 

@@ -6,15 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="msvc-usuarios" />
-        <module name="msvc-cursos" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="msvc-cursos" target="17" />
+      <module name="msvc-usuarios" target="17" />
+      <module name="otro" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="msvc-cursos" options="-parameters" />
       <module name="msvc-usuarios" options="-parameters" />
+      <module name="otro" options="-parameters" />
     </option>
   </component>
 </project>
